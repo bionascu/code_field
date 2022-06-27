@@ -94,6 +94,9 @@ class CodeField extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.readOnly}
   final bool readOnly;
 
+  /// {@macro flutter.widgets.textField.keyboardType}
+  final TextInputType? keyboardType;
+
   final Color? background;
   final EdgeInsets padding;
   final Decoration? decoration;
@@ -120,6 +123,7 @@ class CodeField extends StatefulWidget {
     this.focusNode,
     this.onChanged,
     this.smartQuotesType = SmartQuotesType.enabled,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -277,7 +281,7 @@ class CodeFieldState extends State<CodeField> {
     );
 
     final codeField = TextField(
-      keyboardType: TextInputType.visiblePassword,
+      keyboardType: widget.keyboardType,
       smartQuotesType: widget.smartQuotesType,
       focusNode: _focusNode,
       scrollPadding: widget.padding,
