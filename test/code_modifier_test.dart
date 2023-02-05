@@ -6,46 +6,42 @@ import 'package:code_text_field/src/code_controller.dart';
 
 void main() {
   group("TabModifier", () {
+    TabModifier tabModifier = TabModifier();
+
     test(
         'TabModifier should insert tabSpaces space characters at the start of the selected text',
         () {
-      final tabModifier = TabModifier();
       final text = 'Lorem ipsum dolor sit amet';
       final selection = TextSelection.collapsed(offset: 0);
       final editorParams = EditorParams(tabSpaces: 2);
-
       final result = tabModifier.updateString(text, selection, editorParams);
-
       expect(result?.text, '  Lorem ipsum dolor sit amet');
-      print(result?.selection.baseOffset);
-      print('\n');
-      print(result?.selection.extentOffset);
+      expect(result?.selection.baseOffset, 2);
+      expect(result?.selection.extentOffset, 2);
     });
 
     test(
         'TabModifier should insert tabSpaces space characters inside the selected text, based on the offset',
         () {
-      final tabModifier = TabModifier();
       final text = 'Lorem ipsum dolor sit amet';
       final selection = TextSelection.collapsed(offset: 7);
       final editorParams = EditorParams(tabSpaces: 3);
-
       final result = tabModifier.updateString(text, selection, editorParams);
-
       expect(result?.text, 'Lorem i   psum dolor sit amet');
+      expect(result?.selection.baseOffset, 10);
+      expect(result?.selection.extentOffset, 10);
     });
 
     test(
         'TabModifier should insert tabSpaces space characters at the end of the selected text',
         () {
-      final tabModifier = TabModifier();
       final text = 'Lorem ipsum dolor sit amet';
       final selection = TextSelection.collapsed(offset: 26);
       final editorParams = EditorParams(tabSpaces: 2);
-
       final result = tabModifier.updateString(text, selection, editorParams);
-
       expect(result?.text, 'Lorem ipsum dolor sit amet  ');
+      expect(result?.selection.baseOffset, 28);
+      expect(result?.selection.extentOffset, 28);
     });
   });
 
