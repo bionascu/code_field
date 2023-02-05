@@ -5,7 +5,7 @@ import 'package:code_text_field/src/code_modifier.dart';
 import 'package:code_text_field/src/code_controller.dart';
 
 void main() {
-  group("TabModifier", () {
+  group('TabModifier', () {
     TabModifier tabModifier = TabModifier();
 
     test(
@@ -144,6 +144,7 @@ void main() {
   group('SingleCloseQuoteModifier tests', () {
     SingleCloseQuoteModifier modifier = SingleCloseQuoteModifier();
     EditorParams params = EditorParams();
+
     test('Insert single close quote at the start of the selected text', () {
       final text = 'Hello world';
       final sel = TextSelection.collapsed(offset: 0);
