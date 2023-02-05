@@ -48,4 +48,131 @@ void main() {
       expect(result?.text, 'Lorem ipsum dolor sit amet  ');
     });
   });
+
+  group('DoubleOpenQuoteModifier tests', () {
+    DoubleOpenQuoteModifier modifier = DoubleOpenQuoteModifier();
+    EditorParams params = EditorParams();
+
+    test('Insert double quote at the start of the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 0);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, '"Hello world');
+      expect(result?.selection.start, 1);
+      expect(result?.selection.end, 1);
+    });
+
+    test('Insert double quote inside the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 6);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, 'Hello "world');
+      expect(result?.selection.start, 7);
+      expect(result?.selection.end, 7);
+    });
+
+    test('Insert double quote at the end of the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 11);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, 'Hello world"');
+      expect(result?.selection.start, 12);
+      expect(result?.selection.end, 12);
+    });
+  });
+
+  group('DoubleCloseQuoteModifier tests', () {
+    DoubleCloseQuoteModifier modifier = DoubleCloseQuoteModifier();
+    EditorParams params = EditorParams();
+
+    test('Insert double quote at the start of the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 0);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, '"Hello world');
+      expect(result?.selection.start, 1);
+      expect(result?.selection.end, 1);
+    });
+
+    test('Insert double quote inside the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 6);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, 'Hello "world');
+      expect(result?.selection.start, 7);
+      expect(result?.selection.end, 7);
+    });
+
+    test('Insert double quote at the end of the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 11);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, 'Hello world"');
+      expect(result?.selection.start, 12);
+      expect(result?.selection.end, 12);
+    });
+  });
+
+  group('SingleOpenQuoteModifier tests', () {
+    SingleOpenQuoteModifier modifier = SingleOpenQuoteModifier();
+    EditorParams params = EditorParams();
+
+    test('Insert single quote at the start of the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 0);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, "'Hello world");
+      expect(result?.selection.start, 1);
+      expect(result?.selection.end, 1);
+    });
+
+    test('Insert single quote inside the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 6);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, "Hello 'world");
+      expect(result?.selection.start, 7);
+      expect(result?.selection.end, 7);
+    });
+
+    test('Insert single quote at the end of the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 11);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, "Hello world'");
+      expect(result?.selection.start, 12);
+      expect(result?.selection.end, 12);
+    });
+  });
+
+  group('SingleCloseQuoteModifier tests', () {
+    SingleCloseQuoteModifier modifier = SingleCloseQuoteModifier();
+    EditorParams params = EditorParams();
+    test('Insert single close quote at the start of the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 0);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, "'Hello world");
+      expect(result?.selection.start, 1);
+      expect(result?.selection.end, 1);
+    });
+
+    test('Insert single close quote inside the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 6);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, "Hello 'world");
+      expect(result?.selection.start, 7);
+      expect(result?.selection.end, 7);
+    });
+
+    test('Insert single close quote at the end of the selected text', () {
+      final text = 'Hello world';
+      final sel = TextSelection.collapsed(offset: 11);
+      final result = modifier.updateString(text, sel, params);
+      expect(result?.text, "Hello world'");
+      expect(result?.selection.start, 12);
+      expect(result?.selection.end, 12);
+    });
+  });
 }
