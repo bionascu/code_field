@@ -82,3 +82,59 @@ class TabModifier extends CodeModifier {
     return tmp;
   }
 }
+
+class DoubleOpenQuoteModifier extends CodeModifier {
+  const DoubleOpenQuoteModifier() : super('“');
+
+  @override
+  TextEditingValue? updateString(
+    String text,
+    TextSelection sel,
+    EditorParams params,
+  ) {
+    final tmp = replace(text, sel.start, sel.end, '"');
+    return tmp;
+  }
+}
+
+class DoubleCloseQuoteModifier extends CodeModifier {
+  const DoubleCloseQuoteModifier() : super('”');
+
+  @override
+  TextEditingValue? updateString(
+    String text,
+    TextSelection sel,
+    EditorParams params,
+  ) {
+    final tmp = replace(text, sel.start, sel.end, '"');
+    return tmp;
+  }
+}
+
+class SingleOpenQuoteModifier extends CodeModifier {
+  const SingleOpenQuoteModifier() : super('‘');
+
+  @override
+  TextEditingValue? updateString(
+    String text,
+    TextSelection sel,
+    EditorParams params,
+  ) {
+    final tmp = replace(text, sel.start, sel.end, "'");
+    return tmp;
+  }
+}
+
+class SingleCloseQuoteModifier extends CodeModifier {
+  const SingleCloseQuoteModifier() : super('’');
+
+  @override
+  TextEditingValue? updateString(
+    String text,
+    TextSelection sel,
+    EditorParams params,
+  ) {
+    final tmp = replace(text, sel.start, sel.end, "'");
+    return tmp;
+  }
+}
