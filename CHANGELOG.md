@@ -38,3 +38,22 @@
 * added onChange callback
 * added enabled flag
 * fixed middle dot issue
+
+## [1.0.3] - 2022-05-02
+
+* added onTap to CodeField API
+* fixed tab behavior in read-only mode
+* added setCursor method to CodeController
+
+## [1.0.4] - 2022-06-22
+
+* added isDense to CodeField API as optional parameter
+* added smartQuotesType to CodeField API as optional parameter
+* added keyboardType to CodeField API as optional parameter
+* solves 'enter' linebreak bug
+* adds a macos desktop example app
+
+## [1.1.0] - 2022-11-19
+
+* removed webSpaceFix (https://github.com/flutter/flutter/issues/77929)
+* Fixed #58, #59, #60, #62, #64
