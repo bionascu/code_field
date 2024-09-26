@@ -126,6 +126,16 @@ class _CodeFieldState extends State<CodeField> {
     _onTextChanged();
   }
 
+  @override
+  void didUpdateWidget(covariant CodeField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.controller != oldWidget.controller) {
+      oldWidget.controller.removeListener(_onTextChanged);
+      widget.controller.addListener(_onTextChanged);
+    }
+  }
+
   KeyEventResult _onKey(FocusNode node, RawKeyEvent event) {
     if (widget.readOnly) {
       return KeyEventResult.ignored;
