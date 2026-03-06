@@ -183,26 +183,30 @@ class _CodeFieldState extends State<CodeField> {
     Widget codeField,
     TextStyle textStyle,
     double minWidth,
+    double? maxHeight,
   ) {
     final leftPad = widget.lineNumberStyle.margin / 2;
-    final intrinsic = IntrinsicWidth(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: 0,
-              minWidth: max(minWidth - leftPad, 0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: Text(longestLine, style: textStyle),
-            ), // Add extra padding
+    final column = Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: 0,
+            minWidth: max(minWidth - leftPad, 0),
           ),
-          widget.expands ? Expanded(child: codeField) : codeField,
-        ],
-      ),
+          child: Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Text(longestLine, style: textStyle),
+          ), // Add extra padding
+        ),
+        widget.expands ? Expanded(child: codeField) : codeField,
+      ],
+    );
+    final intrinsic = IntrinsicWidth(
+      child: maxHeight != null && widget.expands && maxHeight.isFinite
+          ? SizedBox(height: maxHeight, child: column)
+          : column,
     );
 
     return SingleChildScrollView(
@@ -324,7 +328,12 @@ class _CodeFieldState extends State<CodeField> {
           // Control horizontal scrolling
           return widget.wrap
               ? codeField
-              : _wrapInScrollView(codeField, textStyle, constraints.maxWidth);
+              : _wrapInScrollView(
+                  codeField,
+                  textStyle,
+                  constraints.maxWidth,
+                  constraints.maxHeight.isFinite ? constraints.maxHeight : null,
+                );
         },
       ),
     );
